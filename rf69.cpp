@@ -35,11 +35,11 @@ static SPISettings rf69_spi_settings(4000000, MSBFIRST, SPI_MODE0);
 #define RF69_REG_PAYLOADLENGTH 0x38
 #define RF69_REG_FIFOTHRESH    0x3c
 
-static enum {
+enum mode {
     RF69_MODE_STANDBY  = 0x04,
     RF69_MODE_TRANSMIT = 0x0C,
     RF69_MODE_RECEIVE  = 0x10,
-} mode;
+};
 
 static void writeReg(uint8_t reg, uint8_t value)
 {
