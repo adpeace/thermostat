@@ -11,6 +11,8 @@ for each received RF packet a line will be printed like `RECV TTTT CMD` where
 You can transmit packets by sending `CTTTT\n`, where `C` is `O` for On, `X` for
 Off, or `L` for Learn, and `TTTT` is the thermostat ID.
 
+See https://hackingathome.wordpress.com for more info.
+
 ## Example serial output
 
 ```
