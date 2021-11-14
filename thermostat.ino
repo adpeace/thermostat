@@ -158,12 +158,15 @@ void loop()
 
         decode_3b(data, decoded, 9);
 
-        /* Second half of message is repeated but with extra bit in:
-         * get rid of it so we should have two identical messages: */
-        for (i = 3; i < 9; i++) {
-            decoded[i] = decoded[i] << 1;
-            if (i < 8)
-                decoded[i] |= decoded[i + 1] >> 7;
+        /* Second half of message is repeated but may include an extra bit:
+         * if the packet doesn't look correct already, then get rid of the
+         * extra bit before checking for consistency. */
+        if (decoded[3] != 0xAA && decoded[4] != 0xDD && decoded[5] != 0x46) {
+          for (i = 3; i < 9; i++) {
+              decoded[i] = decoded[i] << 1;
+              if (i < 8)
+                  decoded[i] |= decoded[i + 1] >> 7;
+          }
         }
 
         /* Now decode it: check for message consistency */
